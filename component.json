@@ -1,20 +1,7 @@
 {
     "name": "autos",
     "description": "autos",
-    "local": [
-        "upload",
-        "async",
-        "dust",
-        "serand",
-        "navigation",
-        "user-login",
-        "user-register",
-        "auto-search",
-        "auto-add",
-        "auto-listing",
-        "auto-details",
-        "breadcrumb"
-    ],
+    "local": [],
     "dependencies": {
         "visionmedia/page.js": "*"
     },
