@@ -1,0 +1,29 @@
+{
+    "name": "autos",
+    "description": "autos",
+    "local": [
+        "upload",
+        "async",
+        "dust",
+        "serand",
+        "navigation",
+        "user-login",
+        "user-register",
+        "auto-search",
+        "auto-add",
+        "auto-listing",
+        "auto-details",
+        "breadcrumb"
+    ],
+    "dependencies": {
+        "visionmedia/page.js": "*"
+    },
+    "scripts": ["boot.js", "layout.js"],
+    "styles": ["nunito.css", "oxygen.css", "boot.css"],
+    "templates": ["component.json", "single-column.html", "two-column.html", "three-column.html"],
+    "images": [
+        "images/logo.png",
+        "images/logo@2x.png"
+    ],
+    "main": "boot.js"
+}
