@@ -4,6 +4,9 @@ var dust = require('dust')();
 var serand = require('serand');
 var layout = require('./layout');
 
+//registering jquery, bootstrap etc. plugins
+require('upload');
+
 var page = function (path, fn) {
     pager(path, (fn ? function (ctx) {
         serand.emit('boot', 'page', ctx);
