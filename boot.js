@@ -1,30 +1,14 @@
 var pager = require('page');
-var async = require('async');
 var dust = require('dust')();
+
 var serand = require('serand');
-var layout = require('./layout');
+var page = serand.page;
+var layout = serand.layout(require);
 
 //registering jquery, bootstrap etc. plugins
 require('upload');
-
-var page = function (path, fn) {
-    pager(path, (fn ? function (ctx) {
-        serand.emit('boot', 'page', ctx);
-        fn(ctx);
-    } : null));
-};
-
-var comps = JSON.parse(require('./component.json'));
-comps.local.forEach(function (comp) {
-    require(comp);
-});
-
-var current = function (path) {
-    var ctx = new pager.Context(window.location.pathname + window.location.search);
-    var route = new pager.Route(path);
-    route.match(ctx.path, ctx.params);
-    return ctx;
-};
+//init app
+serand.init(require);
 
 page('/', function (ctx) {
     layout('two-column')

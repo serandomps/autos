@@ -17,7 +17,7 @@
         "serandomps/user-login": "master",
         "serandomps/user-register": "master"
     },
-    "scripts": ["boot.js", "layout.js"],
+    "scripts": ["boot.js"],
     "styles": ["nunito.css", "oxygen.css", "boot.css"],
     "templates": ["component.json", "single-column.html", "two-column.html", "three-column.html"],
     "images": [
