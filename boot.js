@@ -25,7 +25,7 @@ page('/', function (ctx) {
 });
 
 page('/vehicles/:id', function (ctx) {
-    layout('single-column')
+    layout('one-column')
         .area('#header')
         .add('navigation')
         .add('breadcrumb')
@@ -37,7 +37,7 @@ page('/vehicles/:id', function (ctx) {
 });
 
 page('/login', function (ctx) {
-    layout('single-column')
+    layout('one-column')
         .area('#header')
         .add('navigation')
         .area('#middle')
@@ -46,7 +46,7 @@ page('/login', function (ctx) {
 });
 
 page('/register', function (ctx) {
-    layout('single-column')
+    layout('one-column')
         .area('#header')
         .add('navigation')
         .area('#middle')
@@ -55,7 +55,7 @@ page('/register', function (ctx) {
 });
 
 page('/add', function (ctx) {
-    layout('single-column')
+    layout('one-column')
         .area('#header')
         .add('navigation')
         .area('#middle')

@@ -19,7 +19,7 @@
     },
     "scripts": ["boot.js"],
     "styles": ["nunito.css", "oxygen.css", "boot.css"],
-    "templates": ["component.json", "single-column.html", "two-column.html", "three-column.html"],
+    "templates": ["component.json", "one-column.html", "two-column.html", "three-column.html"],
     "images": [
         "images/logo.png",
         "images/logo@2x.png"
