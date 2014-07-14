@@ -3,6 +3,8 @@ var dust = require('dust')();
 
 var serand = require('serand');
 var page = serand.page;
+var redirect = serand.redirect;
+var current = serand.current;
 var layout = serand.layout(require);
 
 //registering jquery, bootstrap etc. plugins
@@ -66,11 +68,11 @@ pager();
 serand.on('user', 'login', function (data) {
     var ctx = current('/:action?val=?');
     console.log(ctx);
-    pager('/');
+    redirect('/');
 });
 
 serand.on('user', 'logout', function (data) {
-    pager('/');
+    redirect('/');
 });
 
 serand.emit('boot', 'init');
