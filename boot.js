@@ -15,7 +15,7 @@ serand.init(require);
 page('/', function (ctx) {
     layout('two-column')
         .area('#header')
-        .add('navigation')
+        .add('autos-navigation')
         .add('breadcrumb')
         .area('#right')
         .add('auto-search')
@@ -27,7 +27,7 @@ page('/', function (ctx) {
 page('/vehicles/:id', function (ctx) {
     layout('one-column')
         .area('#header')
-        .add('navigation')
+        .add('autos-navigation')
         .add('breadcrumb')
         .area('#middle')
         .add('auto-details', {
@@ -39,7 +39,7 @@ page('/vehicles/:id', function (ctx) {
 page('/login', function (ctx) {
     layout('one-column')
         .area('#header')
-        .add('navigation')
+        .add('autos-navigation')
         .area('#middle')
         .add('user-login')
         .render();
@@ -48,7 +48,7 @@ page('/login', function (ctx) {
 page('/register', function (ctx) {
     layout('one-column')
         .area('#header')
-        .add('navigation')
+        .add('autos-navigation')
         .area('#middle')
         .add('user-register')
         .render();
@@ -57,7 +57,7 @@ page('/register', function (ctx) {
 page('/add', function (ctx) {
     layout('one-column')
         .area('#header')
-        .add('navigation')
+        .add('autos-navigation')
         .area('#middle')
         .add('auto-add')
         .render();
