@@ -65,13 +65,13 @@ page('/add', function (ctx) {
 
 pager();
 
-serand.on('user', 'login', function (data) {
+serand.on('user', 'logged in', function (data) {
     var ctx = current('/:action?val=?');
     console.log(ctx);
     redirect('/');
 });
 
-serand.on('user', 'logout', function (data) {
+serand.on('user', 'logged out', function (data) {
     redirect('/');
 });
 
