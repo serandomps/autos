@@ -36,6 +36,18 @@ page('/vehicles/:id', function (ctx) {
         .render();
 });
 
+page('/vehicles/:id/edit', function (ctx) {
+    layout('one-column')
+        .area('#header')
+        .add('autos-navigation')
+        .add('breadcrumb')
+        .area('#middle')
+        .add('auto-add', {
+            id: ctx.params.id
+        })
+        .render();
+});
+
 page('/login', function (ctx) {
     layout('one-column')
         .area('#header')
@@ -59,7 +71,7 @@ page('/add', function (ctx) {
         .area('#header')
         .add('autos-navigation')
         .area('#middle')
-        .add('auto-add')
+        .add('auto-add', {})
         .render();
 });
 
