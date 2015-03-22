@@ -5,12 +5,11 @@ var serand = require('serand');
 var page = serand.page;
 var redirect = serand.redirect;
 var current = serand.current;
-var layout = serand.layout(require);
+var layout = serand.layout('serandomps~autos@master');
 
 //registering jquery, bootstrap etc. plugins
 require('upload');
 //init app
-serand.init(require);
 
 page('/', function (ctx) {
     layout('two-column')

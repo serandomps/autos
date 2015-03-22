@@ -1,7 +1,6 @@
 {
     "name": "autos",
     "description": "autos",
-    "local": [],
     "serand": [
         "async",
         "dust",
