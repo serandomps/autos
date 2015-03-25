@@ -23,6 +23,18 @@ page('/', function (ctx) {
         .render();
 });
 
+page('/vehicles', function (ctx) {
+    layout('two-column')
+        .area('#header')
+        .add('autos-navigation')
+        .add('breadcrumb')
+        .area('#right')
+        .add('auto-search', ctx.query)
+        .area('#middle')
+        .add('auto-listing', ctx.query)
+        .render();
+});
+
 page('/vehicles/:id', function (ctx) {
     layout('one-column')
         .area('#header')
