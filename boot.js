@@ -7,6 +7,22 @@ var redirect = serand.redirect;
 var current = serand.current;
 var layout = serand.layout('serandomps~autos@master');
 
+var user;
+
+var dest;
+
+require('user-login');
+require('navigation');
+//require('autos-navigation');
+var can = function (permission) {
+    return function (ctx, next) {
+        if (user) {
+            return next();
+        }
+        serand.emit('user', 'login', ctx.path);
+    };
+};
+
 //registering jquery, bootstrap etc. plugins
 require('upload');
 //init app
@@ -47,7 +63,7 @@ page('/vehicles/:id', function (ctx) {
         .render();
 });
 
-page('/vehicles/:id/edit', function (ctx) {
+page('/vehicles/:id/edit', can('vehicle:create'), function (ctx) {
     layout('one-column')
         .area('#header')
         .add('autos-navigation')
@@ -77,7 +93,7 @@ page('/register', function (ctx) {
         .render();
 });
 
-page('/add', function (ctx) {
+page('/add', can('vehicle:add'), function (ctx) {
     layout('one-column')
         .area('#header')
         .add('autos-navigation')
@@ -85,18 +101,27 @@ page('/add', function (ctx) {
         .add('auto-add', {})
         .render();
 });
-
 pager();
 
-serand.on('user', 'logged in', function (data) {
-    var ctx = current('/login');
-    if (ctx) {
-        redirect('/');
+//TODO: redirect user to login page when authentication is needed
+//TODO: basically a front controller pattern
+serand.on('user', 'login', function (path) {
+    dest = path;
+    redirect('/login');
+});
+
+serand.on('user', 'logged in', function (usr) {
+    user = usr;
+    if (!dest) {
+        return;
     }
+    redirect(dest);
 });
 
 serand.on('user', 'logged out', function (data) {
+    user = null;
     redirect('/');
 });
+
 
 serand.emit('boot', 'init');
