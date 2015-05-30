@@ -51,7 +51,7 @@ page('/vehicles', function (ctx) {
         .render();
 });
 
-page('/vehicles/:id', can('vehicle:create'), function (ctx) {
+page('/vehicles/:id', can('vehicle:read'), function (ctx) {
     layout('one-column')
         .area('#header')
         .add('autos-navigation')
@@ -63,7 +63,7 @@ page('/vehicles/:id', can('vehicle:create'), function (ctx) {
         .render();
 });
 
-page('/vehicles/:id/edit', can('vehicle:create'), function (ctx) {
+page('/vehicles/:id/edit', can('vehicle:update'), function (ctx) {
     layout('one-column')
         .area('#header')
         .add('autos-navigation')
@@ -93,7 +93,7 @@ page('/register', function (ctx) {
         .render();
 });
 
-page('/add', can('vehicle:add'), function (ctx) {
+page('/add', can('vehicle:create'), function (ctx) {
     layout('one-column')
         .area('#header')
         .add('autos-navigation')
