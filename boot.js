@@ -51,7 +51,7 @@ page('/vehicles', function (ctx) {
         .render();
 });
 
-page('/vehicles/:id', function (ctx) {
+page('/vehicles/:id', can('vehicle:create'), function (ctx) {
     layout('one-column')
         .area('#header')
         .add('autos-navigation')
