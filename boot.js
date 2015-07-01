@@ -1,4 +1,3 @@
-var pager = require('page');
 var dust = require('dust')();
 
 var serand = require('serand');
@@ -101,7 +100,6 @@ page('/add', can('vehicle:create'), function (ctx) {
         .add('auto-add', {})
         .render();
 });
-pager();
 
 //TODO: redirect user to login page when authentication is needed
 //TODO: basically a front controller pattern
@@ -123,5 +121,4 @@ serand.on('user', 'logged out', function (data) {
     redirect('/');
 });
 
-
-serand.emit('boot', 'init');
+serand.emit('serand', 'ready');
