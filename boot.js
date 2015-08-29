@@ -10,7 +10,7 @@ var user;
 
 var dest;
 
-require('user-login');
+require('user');
 require('navigation');
 //require('autos-navigation');
 var can = function (permission) {
@@ -74,7 +74,7 @@ page('/vehicles/:id/edit', can('vehicle:update'), function (ctx) {
         .render();
 });
 
-page('/login', function (ctx) {
+page('/signin', function (ctx) {
     layout('one-column')
         .area('#header')
         .add('autos-navigation')
@@ -105,15 +105,12 @@ page('/add', can('vehicle:create'), function (ctx) {
 //TODO: basically a front controller pattern
 serand.on('user', 'login', function (path) {
     dest = path;
-    redirect('/login');
+    redirect('/signin');
 });
 
 serand.on('user', 'logged in', function (usr) {
     user = usr;
-    if (!dest) {
-        return;
-    }
-    redirect(dest);
+    redirect(dest || '/');
 });
 
 serand.on('user', 'logged out', function (data) {
