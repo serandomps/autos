@@ -4,15 +4,14 @@ var serand = require('serand');
 var page = serand.page;
 var redirect = serand.redirect;
 var current = serand.current;
-var layout = serand.layout('serandomps~autos@master');
+
+var app = serand.boot('serandomps~autos@master');
+var layout = serand.layout(app);
 
 var user;
 
 var dest;
 
-require('user');
-require('navigation');
-//require('autos-navigation');
 var can = function (permission) {
     return function (ctx, next) {
         if (user) {
@@ -21,10 +20,6 @@ var can = function (permission) {
         serand.emit('user', 'login', ctx.path);
     };
 };
-
-//registering jquery, bootstrap etc. plugins
-require('upload');
-//init app
 
 page('/', function (ctx) {
     layout('two-column')
@@ -113,7 +108,7 @@ serand.on('user', 'logged in', function (usr) {
     redirect(dest || '/');
 });
 
-serand.on('user', 'logged out', function (data) {
+serand.on('user', 'logged out', function (usr) {
     user = null;
     redirect('/');
 });
