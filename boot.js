@@ -8,6 +8,8 @@ var current = serand.current;
 var app = serand.boot('serandomps~autos@master');
 var layout = serand.layout(app);
 
+var loginUri = 'https://autos.serandives.com/auth/oauth';
+
 var user;
 
 var dest;
@@ -20,6 +22,20 @@ var can = function (permission) {
         serand.emit('user', 'login', ctx.path);
     };
 };
+
+page('/signin', function(ctx) {
+    serand.emit('user', 'login');
+});
+
+page('/auth/oauth', function(ctx) {
+    var el = $('#content');
+    serand.emit('user', 'logged in', {
+        username: el.data('username'),
+        access: el.data('access'),
+        expires: el.data('expires'),
+        refresh: el.data('refresh')
+    });
+});
 
 page('/', function (ctx) {
     layout('two-column')
@@ -69,30 +85,12 @@ page('/vehicles/:id/edit', can('vehicle:update'), function (ctx) {
         .render();
 });
 
-page('/signin', function (ctx) {
-    layout('one-column')
-        .area('#header')
-        .add('autos-navigation')
-        .area('#middle')
-        .add('user-login')
-        .render();
-});
-
-page('/register', function (ctx) {
-    layout('one-column')
-        .area('#header')
-        .add('autos-navigation')
-        .area('#middle')
-        .add('user-register')
-        .render();
-});
-
 page('/add', can('vehicle:create'), function (ctx) {
     layout('one-column')
         .area('#header')
         .add('autos-navigation')
         .area('#middle')
-        .add('auto-add', {})
+        .add('auto-add')
         .render();
 });
 
@@ -100,7 +98,13 @@ page('/add', can('vehicle:create'), function (ctx) {
 //TODO: basically a front controller pattern
 serand.on('user', 'login', function (path) {
     dest = path;
-    redirect('/signin');
+    serand.emit('user', 'authenticator', loginUri, function(err, uri) {
+        redirect(uri);
+    });
+});
+
+serand.on('user', 'ready', function (usr) {
+    user = usr;
 });
 
 serand.on('user', 'logged in', function (usr) {

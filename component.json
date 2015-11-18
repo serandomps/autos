@@ -1,17 +1,6 @@
 {
     "name": "autos",
     "description": "autos",
-    "serand": [
-        "async",
-        "dust",
-        "serand",
-        "breadcrumb",
-        "upload",
-        "navigation",
-        "autos-navigation",
-        "user-login",
-        "user-register"
-    ],
     "dependencies": {
         "visionmedia/page.js": "*",
         "serandomps/async": "master",
@@ -25,9 +14,7 @@
         "serandomps/breadcrumb": "master",
         "serandomps/navigation": "master",
         "serandomps/autos-navigation": "master",
-        "serandomps/upload": "master",
-        "serandomps/user-login": "master",
-        "serandomps/user-register": "master"
+        "serandomps/upload": "master"
     },
     "scripts": ["boot.js"],
     "styles": ["nunito.css", "oxygen.css", "boot.css"],
