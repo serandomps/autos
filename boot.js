@@ -12,8 +12,6 @@ var loginUri = 'https://autos.serandives.com/auth/oauth';
 
 var user;
 
-var dest;
-
 var can = function (permission) {
     return function (ctx, next) {
         if (user) {
@@ -24,7 +22,8 @@ var can = function (permission) {
 };
 
 page('/signin', function(ctx) {
-    serand.emit('user', 'login');
+    var query = ctx.query | {};
+    serand.emit('user', 'login', query.dest || '/');
 });
 
 page('/auth/oauth', function(ctx) {
@@ -97,8 +96,17 @@ page('/add', can('vehicle:create'), function (ctx) {
 //TODO: redirect user to login page when authentication is needed
 //TODO: basically a front controller pattern
 serand.on('user', 'login', function (path) {
-    dest = path;
-    serand.emit('user', 'authenticator', loginUri, function(err, uri) {
+    var ctx;
+    if (!path) {
+        ctx = serand.current();
+        path = ctx.path;
+    }
+    serand.store('state', {
+        path: path
+    });
+    serand.emit('user', 'authenticator', {
+        location: loginUri
+    }, function (err, uri) {
         redirect(uri);
     });
 });
@@ -109,7 +117,8 @@ serand.on('user', 'ready', function (usr) {
 
 serand.on('user', 'logged in', function (usr) {
     user = usr;
-    redirect(dest || '/');
+    var state = serand.store('state', null);
+    redirect(state.path);
 });
 
 serand.on('user', 'logged out', function (usr) {
