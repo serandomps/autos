@@ -1,6 +1,7 @@
 var dust = require('dust')();
 
 var serand = require('serand');
+var uready = require('uready');
 var page = serand.page;
 var redirect = serand.redirect;
 var current = serand.current;
@@ -20,6 +21,8 @@ var can = function (permission) {
         serand.emit('user', 'login', ctx.path);
     };
 };
+
+page(uready);
 
 page('/signin', function(ctx) {
     var query = ctx.query | {};
@@ -118,7 +121,7 @@ serand.on('user', 'ready', function (usr) {
 serand.on('user', 'logged in', function (usr) {
     user = usr;
     var state = serand.store('state', null);
-    redirect(state.path);
+    redirect(state ? state.path : '/');
 });
 
 serand.on('user', 'logged out', function (usr) {
