@@ -24,5 +24,6 @@
         "images/logo.png",
         "images/logo@2x.png"
     ],
+    "files": ["index.html"],
     "main": "boot.js"
 }
