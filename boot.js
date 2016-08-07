@@ -6,7 +6,7 @@ var page = serand.page;
 var redirect = serand.redirect;
 var current = serand.current;
 
-var app = serand.boot('serandomps~autos@master');
+var app = serand.boot('autos');
 var layout = serand.layout(app);
 
 var loginUri = 'https://autos.serandives.com/auth/oauth';
