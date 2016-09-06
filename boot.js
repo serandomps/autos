@@ -1,6 +1,7 @@
 var dust = require('dust')();
 
 var serand = require('serand');
+var utils = require('utils');
 var uready = require('uready');
 var page = serand.page;
 var redirect = serand.redirect;
@@ -9,7 +10,7 @@ var current = serand.current;
 var app = serand.boot('autos');
 var layout = serand.layout(app);
 
-var loginUri = 'https://autos.serandives.com/auth/oauth';
+var loginUri = utils.resolve('autos://auth/oauth');
 
 var user;
 
