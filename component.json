@@ -19,11 +19,12 @@
         "serandomps/upload": "master"
     },
     "scripts": ["boot.js"],
-    "styles": ["nunito.css", "oxygen.css", "boot.css"],
+    "styles": ["nunito.css", "oxygen.css", "boot.css", "theme.css"],
     "templates": ["component.json", "one-column.html", "two-column.html", "three-column.html"],
     "images": [
         "images/logo.png",
-        "images/logo@2x.png"
+        "images/logo@2x.png",
+        "images/*"
     ],
     "files": ["index.html"],
     "main": "boot.js"
