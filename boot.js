@@ -25,12 +25,12 @@ var can = function (permission) {
 
 page(uready);
 
-page('/signin', function(ctx) {
+page('/signin', function (ctx) {
     var query = ctx.query | {};
     serand.emit('user', 'login', query.dest || '/');
 });
 
-page('/auth/oauth', function(ctx) {
+page('/auth/oauth', function (ctx) {
     var el = $('#content');
     serand.emit('user', 'logged in', {
         username: el.data('username'),
@@ -41,26 +41,27 @@ page('/auth/oauth', function(ctx) {
 });
 
 page('/', function (ctx) {
-    layout('two-column')
+    layout('two-column-right')
         .area('#header')
         .add('autos-navigation')
-        .add('breadcrumb')
+        //.add('breadcrumb')
         .area('#right')
-        .add('autos-search')
+        .add('autos-listing-recent')
         .area('#middle')
-        .add('autos-listing')
+        .add('autos-home')
+        .add('autos-listing-featured')
         .render();
 });
 
 page('/vehicles', function (ctx) {
-    layout('two-column')
+    layout('two-column-left')
         .area('#header')
         .add('autos-navigation')
-        .add('breadcrumb')
-        .area('#right')
+        //.add('breadcrumb')
+        .area('#left')
         .add('autos-search', ctx.query)
         .area('#middle')
-        .add('autos-listing', ctx.query)
+        .add('autos-listing-search', ctx.query)
         .render();
 });
 
@@ -68,7 +69,7 @@ page('/vehicles/:id', can('vehicle:read'), function (ctx) {
     layout('one-column')
         .area('#header')
         .add('autos-navigation')
-        .add('breadcrumb')
+        //.add('breadcrumb')
         .area('#middle')
         .add('autos-details', {
             id: ctx.params.id
@@ -80,7 +81,7 @@ page('/vehicles/:id/edit', can('vehicle:update'), function (ctx) {
     layout('one-column')
         .area('#header')
         .add('autos-navigation')
-        .add('breadcrumb')
+        //.add('breadcrumb')
         .area('#middle')
         .add('autos-add', {
             id: ctx.params.id
