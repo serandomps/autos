@@ -46,10 +46,10 @@ page('/', function (ctx) {
         .add('autos-navigation')
         //.add('breadcrumb')
         .area('#right')
-        .add('autos-listing-recent')
+        .add('vehicles-listing-recent')
         .area('#middle')
         .add('autos-home')
-        .add('autos-listing-featured')
+        .add('vehicles-listing-featured')
         .render();
 });
 
@@ -59,9 +59,9 @@ page('/vehicles', function (ctx) {
         .add('autos-navigation')
         //.add('breadcrumb')
         .area('#left')
-        .add('autos-search', ctx.query)
+        .add('vehicles-search', ctx.query)
         .area('#middle')
-        .add('autos-listing-search', ctx.query)
+        .add('vehicles-listing-search', ctx.query)
         .render();
 });
 
@@ -71,7 +71,7 @@ page('/vehicles/:id', can('vehicle:read'), function (ctx) {
         .add('autos-navigation')
         //.add('breadcrumb')
         .area('#middle')
-        .add('autos-details', {
+        .add('vehicles-details', {
             id: ctx.params.id
         })
         .render();
@@ -83,7 +83,7 @@ page('/vehicles/:id/edit', can('vehicle:update'), function (ctx) {
         .add('autos-navigation')
         //.add('breadcrumb')
         .area('#middle')
-        .add('autos-add', {
+        .add('vehicles-add', {
             id: ctx.params.id
         })
         .render();
@@ -94,7 +94,7 @@ page('/add', can('vehicle:create'), function (ctx) {
         .area('#header')
         .add('autos-navigation')
         .area('#middle')
-        .add('autos-add')
+        .add('vehicles-add')
         .render();
 });
 
