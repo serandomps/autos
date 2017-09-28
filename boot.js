@@ -33,6 +33,7 @@ page('/signin', function (ctx) {
 page('/auth/oauth', function (ctx) {
     var el = $('#content');
     serand.emit('user', 'logged in', {
+        tid: el.data('tid'),
         username: el.data('username'),
         access: el.data('access'),
         expires: el.data('expires'),
@@ -89,12 +90,33 @@ page('/vehicles/:id/edit', can('vehicle:update'), function (ctx) {
         .render();
 });
 
+page('/vehicles/:id/delete', can('vehicle:update'), function (ctx) {
+    layout('one-column')
+        .area('#header')
+        .add('autos-navigation')
+        //.add('breadcrumb')
+        .area('#middle')
+        .add('vehicles-remove', {
+            id: ctx.params.id
+        })
+        .render();
+});
+
 page('/add', can('vehicle:create'), function (ctx) {
     layout('one-column')
         .area('#header')
         .add('autos-navigation')
         .area('#middle')
         .add('vehicles-create')
+        .render();
+});
+
+page('/mine', can('user'), function (ctx) {
+    layout('one-column')
+        .area('#header')
+        .add('autos-navigation')
+        .area('#middle')
+        .add('vehicles-find-mine')
         .render();
 });
 
