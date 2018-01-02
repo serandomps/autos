@@ -55,3 +55,7 @@ form label {
 select.form-control {
     width: auto;
 }
+
+.btn .spinner {
+    margin-right: 8px;
+}
