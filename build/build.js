@@ -7290,10 +7290,10 @@ var send = function (data, done, update) {
             data: JSON.stringify(data)
         },
         success: function (data) {
-            done();
+            done(null, data);
         },
         error: function (xhr, status, err) {
-            done(err);
+            done(err || status || xhr);
         }
     });
 };
@@ -7303,10 +7303,10 @@ var remove = function (id, done) {
         url: AUTO_API + '/' + id,
         type: 'DELETE',
         success: function (data) {
-            done();
+            done(null, data);
         },
         error: function (xhr, status, err) {
-            done(err);
+            done(err || status || xhr);
         }
     });
 };
