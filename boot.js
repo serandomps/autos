@@ -30,15 +30,24 @@ page('/signin', function (ctx) {
     serand.emit('user', 'login', query.dest || '/');
 });
 
+page('/signup', function (ctx) {
+    var query = ctx.query | {};
+    serand.emit('user', 'login', query.dest || '/');
+});
+
 page('/auth/oauth', function (ctx) {
     var el = $('#content');
-    serand.emit('user', 'logged in', {
+    var usr = {
         tid: el.data('tid'),
         username: el.data('username'),
         access: el.data('access'),
         expires: el.data('expires'),
         refresh: el.data('refresh')
-    });
+    }
+    if (usr.username) {
+        return serand.emit('user', 'logged in', usr);
+    }
+    serand.emit('user', 'logged out');
 });
 
 page('/', function (ctx) {
