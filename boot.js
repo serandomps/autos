@@ -10,7 +10,7 @@ var current = serand.current;
 var app = serand.boot('autos');
 var layout = serand.layout(app);
 
-var loginUri = utils.resolve('autos://auth/oauth');
+var loginUri = utils.resolve('autos:///auth');
 
 var user;
 
@@ -35,7 +35,7 @@ page('/signup', function (ctx) {
     serand.emit('user', 'login', query.dest || '/');
 });
 
-page('/auth/oauth', function (ctx) {
+page('/auth', function (ctx) {
     var el = $('#content');
     var usr = {
         tid: el.data('tid'),
@@ -141,6 +141,7 @@ serand.on('user', 'login', function (path) {
         path: path
     });
     serand.emit('user', 'authenticator', {
+        type: 'serandives',
         location: loginUri
     }, function (err, uri) {
         redirect(uri);
