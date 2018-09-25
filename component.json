@@ -24,14 +24,29 @@
         "serandomps/autos-navigation": "master",
         "serandomps/upload": "master"
     },
-    "scripts": ["boot.js"],
-    "styles": ["nunito.css", "oxygen.css", "boot.css", "theme.css"],
-    "templates": ["component.json", "one-column.html", "two-column-left.html", "two-column-right.html", "three-column.html"],
+    "scripts": [
+        "boot.js"
+    ],
+    "styles": [
+        "nunito.css",
+        "oxygen.css",
+        "boot.css",
+        "theme.css"
+    ],
+    "templates": [
+        "component.json",
+        "layouts/one-column.html",
+        "layouts/two-column-left.html",
+        "layouts/two-column-right.html",
+        "layouts/three-column.html"
+    ],
     "images": [
         "images/logo.png",
         "images/logo@2x.png",
         "images/*"
     ],
-    "files": ["index.html"],
+    "files": [
+        "index.html"
+    ],
     "main": "boot.js"
 }
