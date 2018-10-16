@@ -30,32 +30,4 @@ a:active, a:hover {
     width: 100%;
 }*/
 
-.form-group label * {
-    font-weight: normal;
-}
 
-.form-group .options * {
-    font-weight: normal;
-}
-
-form, .form-control {
-    font-size: 13px;
-}
-
-.radio, .checkbox {
-    margin-bottom: 5px;
-    margin-top: 5px;
-}
-
-form label {
-    margin-bottom: 0;
-    margin-top: 3px;
-}
-
-select.form-control {
-    width: auto;
-}
-
-.btn .btn-icon {
-    margin-right: 8px;
-}
