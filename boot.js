@@ -40,11 +40,11 @@ page('/signup', function (ctx, next) {
 page('/auth', function (ctx, next) {
     var el = $('#content');
     var usr = {
-        tid: el.data('tid'),
-        username: el.data('username'),
-        access: el.data('access'),
-        expires: el.data('expires'),
-        refresh: el.data('refresh')
+        tid: sera.tid,
+        username: sera.username,
+        access: sera.access,
+        expires: sera.expires,
+        refresh: sera.refresh
     };
     if (usr.username) {
         return serand.emit('user', 'logged in', usr);
