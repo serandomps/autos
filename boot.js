@@ -16,6 +16,8 @@ var layout = serand.layout(app);
 
 var loginUri = utils.resolve('autos:///auth');
 
+var auth = require('./controllers/auth');
+
 var can = function (permission) {
     return function (ctx, next) {
         if (ctx.user) {
@@ -27,10 +29,7 @@ var can = function (permission) {
 
 // page(uready);
 
-page('/signin', function (ctx, next) {
-    var query = ctx.query | {};
-    serand.emit('user', 'login', query.dest || '/');
-});
+page('/signin', auth.signin);
 
 page('/signup', function (ctx, next) {
     var query = ctx.query | {};

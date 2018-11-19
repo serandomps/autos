@@ -6,6 +6,7 @@
         "serandomps/async": "master",
         "serandomps/dust": "master",
         "serandomps/serand": "master",
+        "serandomps/auth": "master",
         "serandomps/token": "master",
         "serandomps/user": "master",
         "serandomps/utils": "master",
@@ -25,7 +26,8 @@
         "serandomps/upload": "master"
     },
     "scripts": [
-        "boot.js"
+        "boot.js",
+        "controllers/auth.js"
     ],
     "styles": [
         "nunito.css",
