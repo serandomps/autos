@@ -60,7 +60,7 @@ page('/', function (ctx, next) {
         .add('vehicles-find-recent')
         .area('#middle')
         .add('autos-home')
-        .add('vehicles-find-featured')
+        .add('vehicles-find-featured', {deck: true})
         .render(ctx, next);
 });
 
@@ -70,9 +70,9 @@ page('/vehicles', function (ctx, next) {
         .add('autos-navigation')
         //.add('breadcrumb')
         .area('#left')
-        .add('vehicles-search', ctx.query)
+        .add('vehicles-search', {query: ctx.query})
         .area('#middle')
-        .add('vehicles-find-search', ctx.query)
+        .add('vehicles-find-search', {deck: true, query: ctx.query})
         .render(ctx, next);
 });
 
