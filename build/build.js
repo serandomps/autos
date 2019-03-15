@@ -8349,10 +8349,10 @@ module.exports = function (sandbox, fn, options) {
         });
 
         $('.search', elem).click(function () {
-            serand.redirect('/vehicles' + query({
+            serand.redirect('/vehicles', {
                 make: selections.make,
                 model: selections.model
-            }));
+            });
         });
 
         fn(false, function () {

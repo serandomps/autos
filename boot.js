@@ -4,7 +4,7 @@ var serand = require('serand');
 var utils = require('utils');
 var uready = require('uready');
 var page = serand.page;
-var direct = serand.direct;
+var redirect = serand.redirect;
 var current = serand.current;
 
 var app = serand.app({
@@ -76,6 +76,15 @@ page('/vehicles', function (ctx, next) {
         .render(ctx, next);
 });
 
+page('/create-vehicles', can('vehicle:create'), function (ctx, next) {
+    layout('one-column')
+        .area('#header')
+        .add('autos-navigation')
+        .area('#middle')
+        .add('vehicles-create')
+        .render(ctx, next);
+});
+
 page('/vehicles/:id', can('vehicle:read'), function (ctx, next) {
     layout('one-column')
         .area('#header')
@@ -112,15 +121,6 @@ page('/vehicles/:id/delete', can('vehicle:update'), function (ctx, next) {
         .render(ctx, next);
 });
 
-page('/add', can('vehicle:create'), function (ctx, next) {
-    layout('one-column')
-        .area('#header')
-        .add('autos-navigation')
-        .area('#middle')
-        .add('vehicles-create')
-        .render(ctx, next);
-});
-
 page('/mine', can('user'), function (ctx, next) {
     layout('one-column')
         .area('#header')
@@ -145,18 +145,18 @@ serand.on('user', 'login', function (path) {
         type: 'serandives',
         location: loginUri
     }, function (err, uri) {
-        direct(uri);
+        redirect(uri);
     });
 });
 
 serand.on('user', 'logged in', function (usr) {
     var state = serand.store('state', null);
-    direct(state ? state.path : '/');
+    redirect(state && state.path || '/');
 });
 
 serand.on('user', 'logged out', function (usr) {
     var state = serand.store('state', null);
-    direct(state ? state.path : '/');
+    redirect(state && state.path || '/');
 });
 
 serand.emit('serand', 'ready');

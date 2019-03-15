@@ -1,7 +1,7 @@
 var serand = require('serand');
 var utils = require('utils');
 var auth = require('auth');
-var direct = serand.direct;
+var redirect = serand.redirect;
 
 var base = utils.resolve('accounts://');
 var loginUri = utils.resolve('autos:///auth');
@@ -20,7 +20,7 @@ module.exports.signin = function (ctx, next) {
         if (err) {
             return next(err);
         }
-        direct(uri);
+        redirect(uri);
     });
 };
 
@@ -36,5 +36,5 @@ module.exports.force = function (ctx, next) {
     serand.store('state', {
         path: path
     });
-    direct('/signin');
+    redirect('/signin');
 };
