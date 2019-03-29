@@ -11,6 +11,7 @@
         "serandomps/user": "master",
         "serandomps/utils": "master",
         "serandomps/uready": "master",
+        "serandomps/autos-client": "master",
         "serandomps/autos-home": "master",
         "serandomps/vehicles-create": "master",
         "serandomps/vehicles-remove": "master",
@@ -26,13 +27,13 @@
         "serandomps/upload": "master"
     },
     "scripts": [
-        "boot.js",
+        "index.js",
         "controllers/auth.js"
     ],
     "styles": [
         "nunito.css",
         "oxygen.css",
-        "boot.css",
+        "index.css",
         "theme.css"
     ],
     "templates": [
@@ -50,5 +51,5 @@
     "files": [
         "index.html"
     ],
-    "main": "boot.js"
+    "main": "index.js"
 }
