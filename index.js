@@ -27,7 +27,13 @@ var can = function (permission) {
     };
 };
 
-// page(uready);
+page(function (ctx, next) {
+    serand.emit('loader', 'start', {
+        name: 'autos-navigation',
+        delay: 500
+    });
+    next();
+});
 
 page('/signin', auth.signin);
 
