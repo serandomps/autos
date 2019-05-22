@@ -63,10 +63,10 @@ page('/', function (ctx, next) {
         .add('autos-navigation')
         //.add('breadcrumb')
         .area('#right')
-        .add('vehicles-find-recent')
+        .add('vehicles:recent')
         .area('#middle')
         .add('autos-home')
-        .add('vehicles-find-featured', {deck: true})
+        .add('vehicles:featured', {deck: true})
         .render(ctx, next);
 });
 
@@ -76,9 +76,9 @@ page('/vehicles', function (ctx, next) {
         .add('autos-navigation')
         //.add('breadcrumb')
         .area('#left')
-        .add('vehicles-search', {query: ctx.query})
+        .add('vehicles:filter', {query: ctx.query})
         .area('#middle')
-        .add('vehicles-find-search', {deck: true, query: ctx.query})
+        .add('vehicles:search', {deck: true, query: ctx.query})
         .render(ctx, next);
 });
 
@@ -87,7 +87,7 @@ page('/create-vehicles', can('vehicle:create'), function (ctx, next) {
         .area('#header')
         .add('autos-navigation')
         .area('#middle')
-        .add('vehicles-create')
+        .add('vehicles:create')
         .render(ctx, next);
 });
 
@@ -97,7 +97,7 @@ page('/vehicles/:id', can('vehicle:read'), function (ctx, next) {
         .add('autos-navigation')
         //.add('breadcrumb')
         .area('#middle')
-        .add('vehicles-findone', {
+        .add('vehicles:findone', {
             id: ctx.params.id
         })
         .render(ctx, next);
@@ -109,7 +109,7 @@ page('/vehicles/:id/edit', can('vehicle:update'), function (ctx, next) {
         .add('autos-navigation')
         //.add('breadcrumb')
         .area('#middle')
-        .add('vehicles-create', {
+        .add('vehicles:create', {
             id: ctx.params.id
         })
         .render(ctx, next);
@@ -121,7 +121,7 @@ page('/vehicles/:id/delete', can('vehicle:update'), function (ctx, next) {
         .add('autos-navigation')
         //.add('breadcrumb')
         .area('#middle')
-        .add('vehicles-remove', {
+        .add('vehicles:remove', {
             id: ctx.params.id
         })
         .render(ctx, next);
@@ -132,7 +132,7 @@ page('/mine', can('user'), function (ctx, next) {
         .area('#header')
         .add('autos-navigation')
         .area('#middle')
-        .add('vehicles-find-mine')
+        .add('vehicles:mine')
         .render(ctx, next);
 });
 
