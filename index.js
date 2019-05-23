@@ -52,7 +52,7 @@ page('/auth', function (ctx, next) {
         refresh: sera.refresh
     };
     if (usr.username) {
-        return serand.emit('user', 'logged in', usr);
+        return serand.emit('user', 'initialize', usr);
     }
     serand.emit('user', 'logged out');
 });
