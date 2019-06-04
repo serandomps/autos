@@ -20,7 +20,7 @@ var auth = require('./controllers/auth');
 
 var can = function (permission) {
     return function (ctx, next) {
-        if (ctx.user) {
+        if (ctx.token) {
             return next();
         }
         serand.emit('user', 'login', ctx.path);
@@ -29,7 +29,6 @@ var can = function (permission) {
 
 page(function (ctx, next) {
     serand.emit('loader', 'start', {
-        name: 'autos-navigation',
         delay: 500
     });
     next();
@@ -44,15 +43,15 @@ page('/signup', function (ctx, next) {
 
 page('/auth', function (ctx, next) {
     var el = $('#content');
-    var usr = {
+    var o = {
         tid: sera.tid,
         username: sera.username,
         access: sera.access,
         expires: sera.expires,
         refresh: sera.refresh
     };
-    if (usr.username) {
-        return serand.emit('user', 'initialize', usr);
+    if (o.username) {
+        return serand.emit('user', 'initialize', o);
     }
     serand.emit('user', 'logged out');
 });
@@ -60,32 +59,32 @@ page('/auth', function (ctx, next) {
 page('/', function (ctx, next) {
     layout('two-column-right')
         .area('#header')
-        .add('autos-navigation')
+        .add('autos-client:navigation')
         //.add('breadcrumb')
         .area('#right')
         .add('vehicles:recent')
         .area('#middle')
-        .add('autos-home')
-        .add('vehicles:featured', {deck: true})
+        .add('autos-client:home')
+        .add('vehicles:featured')
         .render(ctx, next);
 });
 
 page('/vehicles', function (ctx, next) {
     layout('two-column-left')
         .area('#header')
-        .add('autos-navigation')
+        .add('autos-client:navigation')
         //.add('breadcrumb')
         .area('#left')
         .add('vehicles:filter', {query: ctx.query})
         .area('#middle')
-        .add('vehicles:search', {deck: true, query: ctx.query})
+        .add('vehicles:search', {query: ctx.query})
         .render(ctx, next);
 });
 
 page('/create-vehicles', can('vehicle:create'), function (ctx, next) {
     layout('one-column')
         .area('#header')
-        .add('autos-navigation')
+        .add('autos-client:navigation')
         .area('#middle')
         .add('vehicles:create')
         .render(ctx, next);
@@ -94,7 +93,7 @@ page('/create-vehicles', can('vehicle:create'), function (ctx, next) {
 page('/vehicles/:id', can('vehicle:read'), function (ctx, next) {
     layout('one-column')
         .area('#header')
-        .add('autos-navigation')
+        .add('autos-client:navigation')
         //.add('breadcrumb')
         .area('#middle')
         .add('vehicles:findone', {
@@ -106,7 +105,7 @@ page('/vehicles/:id', can('vehicle:read'), function (ctx, next) {
 page('/vehicles/:id/edit', can('vehicle:update'), function (ctx, next) {
     layout('one-column')
         .area('#header')
-        .add('autos-navigation')
+        .add('autos-client:navigation')
         //.add('breadcrumb')
         .area('#middle')
         .add('vehicles:create', {
@@ -118,7 +117,7 @@ page('/vehicles/:id/edit', can('vehicle:update'), function (ctx, next) {
 page('/vehicles/:id/delete', can('vehicle:update'), function (ctx, next) {
     layout('one-column')
         .area('#header')
-        .add('autos-navigation')
+        .add('autos-client:navigation')
         //.add('breadcrumb')
         .area('#middle')
         .add('vehicles:remove', {
@@ -130,7 +129,7 @@ page('/vehicles/:id/delete', can('vehicle:update'), function (ctx, next) {
 page('/mine', can('user'), function (ctx, next) {
     layout('one-column')
         .area('#header')
-        .add('autos-navigation')
+        .add('autos-client:navigation')
         .area('#middle')
         .add('vehicles:mine')
         .render(ctx, next);
@@ -155,7 +154,7 @@ serand.on('user', 'login', function (path) {
     });
 });
 
-serand.on('user', 'logged in', function (usr) {
+serand.on('user', 'logged in', function (token) {
     var state = serand.store('state', null);
     redirect(state && state.path || '/');
 });

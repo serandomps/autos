@@ -11,11 +11,9 @@
         "serandomps/utils": "master",
         "serandomps/uready": "master",
         "serandomps/autos-client": "master",
-        "serandomps/autos-home": "master",
         "serandomps/vehicles": "master",
         "serandomps/breadcrumb": "master",
         "serandomps/navigation": "master",
-        "serandomps/autos-navigation": "master",
         "serandomps/upload": "master"
     },
     "scripts": [

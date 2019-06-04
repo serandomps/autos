@@ -25,7 +25,7 @@ module.exports.signin = function (ctx, next) {
 };
 
 module.exports.force = function (ctx, next) {
-    if (ctx.user) {
+    if (ctx.token) {
         return next();
     }
     var path = ctx.path;
