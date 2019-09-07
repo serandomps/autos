@@ -123,18 +123,6 @@ page('/vehicles/:id/delete', can('vehicle:update'), function (ctx, next) {
         .render(ctx, next);
 });
 
-page('/vehicles/:id/status', can('vehicle:update'), function (ctx, next) {
-    layout('one-column')
-        .area('#header')
-        .add('autos-client:navigation')
-        //.add('breadcrumb')
-        .area('#middle')
-        .add('vehicles:status', {
-            id: ctx.params.id
-        })
-        .render(ctx, next);
-});
-
 page('/mine', can('user'), function (ctx, next) {
     layout('one-column')
         .area('#header')
