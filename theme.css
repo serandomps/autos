@@ -73,8 +73,3 @@ body {
 .panel-default>.panel-heading {
     border-bottom: 1px solid #ddd;
 }
-
-.h2, h2 {
-    font-size: 20px;
-    font-weight: bold;
-}
