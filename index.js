@@ -25,9 +25,7 @@ var can = function (permission) {
 };
 
 page(function (ctx, next) {
-    serand.emit('loader', 'start', {
-        delay: 500
-    });
+    utils.loading();
     next();
 });
 
@@ -35,7 +33,7 @@ page('/signin', auth.signin);
 
 page('/signup', function (ctx, next) {
     var query = ctx.query | {};
-    serand.emit('user', 'login', query.dest || '/');
+    utils.emit('user', 'login', query.dest || '/');
 });
 
 page('/auth', function (ctx, next) {
@@ -48,9 +46,9 @@ page('/auth', function (ctx, next) {
         refresh: sera.refresh
     };
     if (o.username) {
-        return serand.emit('user', 'initialize', o);
+        return utils.emit('user', 'initialize', o);
     }
-    serand.emit('user', 'logged out');
+    utils.emit('user', 'logged out');
 });
 
 page('/', function (ctx, next) {
@@ -63,6 +61,8 @@ page('/', function (ctx, next) {
         .area('#middle')
         .add('autos-client:home')
         .add('vehicles:featured')
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -75,6 +75,8 @@ page('/vehicles', function (ctx, next) {
         .add('vehicles:filter', {query: ctx.query})
         .area('#middle')
         .add('vehicles:search', {query: ctx.query})
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -84,6 +86,8 @@ page('/create-vehicles', can('vehicle:create'), function (ctx, next) {
         .add('autos-client:navigation')
         .area('#middle')
         .add('vehicles:create')
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -96,6 +100,8 @@ page('/vehicles/:id', can('vehicle:read'), function (ctx, next) {
         .add('vehicles:findone', {
             id: ctx.params.id
         })
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -108,6 +114,8 @@ page('/vehicles/:id/edit', can('vehicle:update'), function (ctx, next) {
         .add('vehicles:create', {
             id: ctx.params.id
         })
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -120,6 +128,8 @@ page('/vehicles/:id/delete', can('vehicle:update'), function (ctx, next) {
         .add('vehicles:remove', {
             id: ctx.params.id
         })
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
@@ -129,12 +139,14 @@ page('/mine', can('user'), function (ctx, next) {
         .add('autos-client:navigation')
         .area('#middle')
         .add('vehicles:mine')
+        .area('#footer')
+        .add('footer')
         .render(ctx, next);
 });
 
 //TODO: redirect user to login page when authentication is needed
 //TODO: basically a front controller pattern
-serand.on('user', 'login', function (path) {
+utils.on('user', 'login', function (path) {
     var ctx;
     if (!path) {
         ctx = serand.current();
@@ -143,7 +155,7 @@ serand.on('user', 'login', function (path) {
     serand.store('state', {
         path: path
     });
-    serand.emit('user', 'authenticator', {
+    utils.emit('user', 'authenticator', {
         type: 'serandives',
         location: loginUri
     }, function (err, uri) {
@@ -151,14 +163,14 @@ serand.on('user', 'login', function (path) {
     });
 });
 
-serand.on('user', 'logged in', function (token) {
+utils.on('user', 'logged in', function (token) {
     var state = serand.store('state', null);
     redirect(state && state.path || '/');
 });
 
-serand.on('user', 'logged out', function (usr) {
+utils.on('user', 'logged out', function (usr) {
     var state = serand.store('state', null);
     redirect(state && state.path || '/');
 });
 
-serand.emit('serand', 'ready');
+utils.emit('serand', 'ready');
