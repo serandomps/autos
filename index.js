@@ -1,6 +1,7 @@
 var dust = require('dust')();
 
 var serand = require('serand');
+var auth = require('auth');
 var utils = require('utils');
 var uready = require('uready');
 var page = serand.page;
@@ -16,7 +17,7 @@ var layout = serand.layout(app);
 
 var loginUri = utils.resolve('autos:///auth');
 
-var auth = require('./controllers/auth');
+var author = require('./controllers/auth');
 
 var can = function (permission) {
     return function (ctx, next) {
@@ -29,7 +30,7 @@ page(function (ctx, next) {
     next();
 });
 
-page('/signin', auth.signin);
+page('/signin', author.signin);
 
 page('/signup', function (ctx, next) {
     var query = ctx.query | {};
@@ -144,33 +145,35 @@ page('/mine', can('user'), function (ctx, next) {
         .render(ctx, next);
 });
 
-//TODO: redirect user to login page when authentication is needed
-//TODO: basically a front controller pattern
-utils.on('user', 'login', function (path) {
+utils.on('user', 'login', function (location) {
     var ctx;
-    if (!path) {
+    if (!location) {
         ctx = serand.current();
-        path = ctx.path;
+        location = ctx.path;
     }
     serand.store('state', {
-        path: path
+        location: location
     });
-    utils.emit('user', 'authenticator', {
+
+    auth.authenticator({
         type: 'serandives',
         location: loginUri
     }, function (err, uri) {
+        if (err) {
+            return console.error(err);
+        }
         redirect(uri);
     });
 });
 
 utils.on('user', 'logged in', function (token) {
     var state = serand.store('state', null);
-    redirect(state && state.path || '/');
+    redirect(state && state.location || '/');
 });
 
 utils.on('user', 'logged out', function (usr) {
     var state = serand.store('state', null);
-    redirect(state && state.path || '/');
+    redirect(state && state.location || '/');
 });
 
 utils.emit('serand', 'ready');
