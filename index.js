@@ -68,14 +68,19 @@ page('/', function (ctx, next) {
 });
 
 page('/vehicles', function (ctx, next) {
+    var o = utils.fromQuery(ctx.query);
+    o.count = o.count || 30;
     layout('two-column-left')
         .area('#header')
         .add('autos-client:navigation')
         //.add('breadcrumb')
         .area('#left')
-        .add('vehicles:filter', {query: ctx.query})
+        .add('vehicles:filter', {query: o.query})
         .area('#middle')
-        .add('vehicles:search', {query: ctx.query})
+        .add('vehicles:search', {
+            loadable: true,
+            query: o
+        })
         .area('#footer')
         .add('footer')
         .render(ctx, next);
