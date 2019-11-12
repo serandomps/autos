@@ -6623,7 +6623,7 @@ require.register("serandomps~utils@master", function (exports, module) {
 exports.configs = function (name, done) {
     $.ajax({
         method: 'GET',
-        url: exports.resolve('accounts://apis/v/configs/' + name),
+        url: exports.resolve('www://apis/v/configs/' + name),
         dataType: 'json',
         success: function (config) {
             done(false, config.value);
