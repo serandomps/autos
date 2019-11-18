@@ -25,11 +25,6 @@ var can = function (permission) {
     };
 };
 
-page(function (ctx, next) {
-    utils.loading();
-    next();
-});
-
 page('/signin', author.signin);
 
 page('/signup', function (ctx, next) {
