@@ -53,10 +53,10 @@ page('/', function (ctx, next) {
         .add('autos-client:navigation')
         //.add('breadcrumb')
         .area('#right')
-        .add('vehicles:recent')
+        .add('model-vehicles:recent')
         .area('#middle')
         .add('autos-client:home')
-        .add('vehicles:featured')
+        .add('model-vehicles:featured')
         .area('#footer')
         .add('footer')
         .render(ctx, next);
@@ -70,9 +70,9 @@ page('/vehicles', function (ctx, next) {
         .add('autos-client:navigation')
         //.add('breadcrumb')
         .area('#left')
-        .add('vehicles:filter', {query: o.query})
+        .add('model-vehicles:filter', {query: o.query})
         .area('#middle')
-        .add('vehicles:search', {
+        .add('model-vehicles:search', {
             loadable: true,
             query: o
         })
@@ -86,7 +86,7 @@ page('/create-vehicles', can('vehicle:create'), function (ctx, next) {
         .area('#header')
         .add('autos-client:navigation')
         .area('#middle')
-        .add('vehicles:create')
+        .add('model-vehicles:create')
         .area('#footer')
         .add('footer')
         .render(ctx, next);
@@ -98,7 +98,7 @@ page('/vehicles/:id', can('vehicle:read'), function (ctx, next) {
         .add('autos-client:navigation')
         //.add('breadcrumb')
         .area('#middle')
-        .add('vehicles:findone', {
+        .add('model-vehicles:findone', {
             id: ctx.params.id
         })
         .area('#footer')
@@ -112,7 +112,7 @@ page('/vehicles/:id/edit', can('vehicle:update'), function (ctx, next) {
         .add('autos-client:navigation')
         //.add('breadcrumb')
         .area('#middle')
-        .add('vehicles:create', {
+        .add('model-vehicles:create', {
             id: ctx.params.id
         })
         .area('#footer')
@@ -126,7 +126,7 @@ page('/vehicles/:id/delete', can('vehicle:update'), function (ctx, next) {
         .add('autos-client:navigation')
         //.add('breadcrumb')
         .area('#middle')
-        .add('vehicles:remove', {
+        .add('model-vehicles:remove', {
             id: ctx.params.id
         })
         .area('#footer')
@@ -139,7 +139,7 @@ page('/mine', can('user'), function (ctx, next) {
         .area('#header')
         .add('autos-client:navigation')
         .area('#middle')
-        .add('vehicles:mine')
+        .add('model-vehicles:mine')
         .area('#footer')
         .add('footer')
         .render(ctx, next);
