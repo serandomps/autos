@@ -11,6 +11,7 @@
         "serandomps/utils": "master",
         "serandomps/uready": "master",
         "serandomps/autos-client": "master",
+        "serandomps/model-messages": "master",
         "serandomps/model-vehicles": "master",
         "serandomps/breadcrumb": "master",
         "serandomps/footer": "master",
