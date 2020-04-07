@@ -7,7 +7,7 @@ var base = utils.resolve('accounts://');
 var loginUri = utils.resolve('autos:///auth');
 
 module.exports.signin = function (ctx, next) {
-    var location = ctx.query.redirect_uri
+    var location = ctx.query.redirect_uri;
 
     serand.store('state', {
         location: location
