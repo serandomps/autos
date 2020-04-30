@@ -8,6 +8,9 @@ var page = serand.page;
 var redirect = serand.redirect;
 var current = serand.current;
 
+var advertisements = require('model-advertisements');
+var Advertisements = advertisements.service;
+
 var app = serand.app({
     self: 'autos',
     from: 'serandomps'
@@ -182,6 +185,10 @@ utils.on('user', 'logged in', function (token) {
 utils.on('user', 'logged out', function (usr) {
     var state = serand.store('state', null);
     redirect(state && state.location || '/');
+});
+
+utils.on('page', 'ready', function () {
+    Advertisements.inject($('.advertisement'));
 });
 
 utils.emit('serand', 'ready');
