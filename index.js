@@ -20,15 +20,15 @@ var layout = serand.layout(app);
 
 var loginUri = utils.resolve('autos:///auth');
 
-var author = require('./controllers/auth');
-
 var can = function (permission) {
     return function (ctx, next) {
         next();
     };
 };
 
-page('/signin', author.signin);
+page('/signin', auth.signin({
+    loginUri: loginUri
+}));
 
 page('/auth', function (ctx, next) {
     var el = $('#content');
@@ -162,7 +162,7 @@ utils.on('user', 'login', function (location) {
     if (!location) {
         location = serand.path();
     }
-    serand.store('state', {
+    serand.persist('state', {
         location: location
     });
 
@@ -178,12 +178,12 @@ utils.on('user', 'login', function (location) {
 });
 
 utils.on('user', 'logged in', function (token) {
-    var state = serand.store('state', null);
+    var state = serand.persist('state', null);
     redirect(state && state.location || '/');
 });
 
 utils.on('user', 'logged out', function (usr) {
-    var state = serand.store('state', null);
+    var state = serand.persist('state', null);
     redirect(state && state.location || '/');
 });
 

@@ -6827,7 +6827,7 @@ var emit = function (usr) {
 
 var update = function (usr) {
     user = usr;
-    serand.store('user', usr);
+    serand.persist('user', usr);
     if (!usr) {
         clearTimeout(refresher);
     }
@@ -6930,7 +6930,7 @@ var next = function (expires) {
 };
 
 var initialize = function () {
-    var usr = serand.store('user');
+    var usr = serand.persist('user');
     if (!usr) {
         return emitup(null);
     }
@@ -11432,7 +11432,7 @@ serand.on('user', 'login', function (path) {
         ctx = serand.current();
         path = ctx.path;
     }
-    serand.store('state', {
+    serand.persist('state', {
         path: path
     });
     serand.emit('user', 'authenticator', {
@@ -11448,7 +11448,7 @@ serand.on('user', 'ready', function (usr) {
 
 serand.on('user', 'logged in', function (usr) {
     user = usr;
-    var state = serand.store('state', null);
+    var state = serand.persist('state', null);
     redirect(state ? state.path : '/');
 });
 
