@@ -62,7 +62,7 @@ page('/', function (ctx, next) {
 
 page('/vehicles', function (ctx, next) {
     var o = utils.fromQuery(ctx.query);
-    o.count = o.count || 30;
+    o.count = o.count || 15;
     layout('two-column-left')
         .area('#header')
         .add('autos-client:navigation')

@@ -6952,7 +6952,7 @@ var refresh = function (usr, done) {
     $.ajax({
         token: true,
         method: 'POST',
-        url: utils.resolve('accounts:///apis/v/tokens'),
+        url: utils.resolve('apis:///v/tokens'),
         data: {
             grant_type: 'refresh_token',
             refresh_token: usr.refresh
@@ -7007,7 +7007,7 @@ serand.on('user', 'logout', function () {
     }
     $.ajax({
         method: 'DELETE',
-        url: utils.resolve('accounts:///apis/v/tokens/' + user.access),
+        url: utils.resolve('apis:///v/tokens/' + user.access),
         dataType: 'json',
         success: function (data) {
             console.log('logout successful');
@@ -7053,7 +7053,7 @@ serand.on('user', 'info', function (id, token, done) {
     }
     var options = {
         method: 'GET',
-        url: utils.resolve('accounts:///apis/v/users/' + id),
+        url: utils.resolve('apis:///v/users/' + id),
         dataType: 'json',
         success: function (user) {
             done(false, user);
@@ -7264,7 +7264,7 @@ var utils = require('serandomps~utils@master');
 
 var cdn = autils.cdn();
 
-var AUTO_API = utils.resolve('autos:///apis/v/vehicles');
+var AUTO_API = utils.resolve('apis:///v/vehicles');
 
 var upload = function (data, files, next, elem) {
     $('.fileupload', elem).fileupload('send', {
@@ -8164,7 +8164,7 @@ dust.loadSource(dust.compile(require('serandomps~vehicles-findone@master/templat
 
 module.exports = function (sandbox, fn, options) {
     $.ajax({
-        url: utils.resolve('autos:///apis/v/vehicles/' + options.id),
+        url: utils.resolve('apis:///v/vehicles/' + options.id),
         dataType: 'json',
         success: function (data) {
             dust.render('vehicles-findone', autils.cdn800x450(data), function (err, out) {
@@ -8244,7 +8244,7 @@ var query = function (options) {
 
 var list = function (el, options, fn) {
     $.ajax({
-        url: utils.resolve('autos:///apis/v/vehicles' + query(options)),
+        url: utils.resolve('apis:///v/vehicles' + query(options)),
         dataType: 'json',
         success: function (data) {
             dust.render('vehicles-find', autils.cdn288x162(data), function (err, out) {
@@ -8517,7 +8517,7 @@ var ready = false;
 
 var render = function (done) {
     $.ajax({
-        url: utils.resolve('accounts:///apis/v/menus/1'),
+        url: utils.resolve('apis:///v/menus/1'),
         dataType: 'json',
         success: function (links) {
             done(false, links);
