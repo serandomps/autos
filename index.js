@@ -118,14 +118,13 @@ page('/vehicles/:id/edit', function (ctx, next) {
         .render(ctx, next);
 });
 
-page('/:model/:about/report', function (ctx, next) {
+page('/vehicles/:about/report', function (ctx, next) {
     layout('one-column')
         .area('#header')
         .add('autos-client:navigation')
         //.add('breadcrumb')
         .area('#middle')
-        .add('model-messages:create', {
-            model: ctx.params.model,
+        .add('model-vehicles:report', {
             about: ctx.params.about
         })
         .area('#footer')
